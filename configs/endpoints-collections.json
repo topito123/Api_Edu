@@ -1,0 +1,256 @@
+{
+    "info": {
+        "_postman_id": "new-id",
+        "name": "Edu-API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+        "_exporter_id": "new-exporter-id"
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "John",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "surname",
+                                    "value": "Doe",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "username",
+                                    "value": "jdoe",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "jdoe@gmail.com",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "phone",
+                                    "value": "123456789",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "password123",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "role",
+                                    "value": "USER_ROLE",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "profilePicture",
+                                    "type": "file",
+                                    "src": "path/to/profile/picture"
+                                }
+                            ]
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/auth/register"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\":\"jdoe@gmail.com\",\r\n    \"password\":\"password123\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/auth/login"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Find User by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://127.0.0.1:3001/eduApi/v1/user/findUser/1234567890"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "http://127.0.0.1:3001/eduApi/v1/user/deleteUser/1234567890"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "List Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://127.0.0.1:3001/eduApi/v1/user/",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3001",
+                            "path": [
+                                "eduApi",
+                                "v1",
+                                "user",
+                                ""
+                            ],
+                            "query": [
+                                {
+                                    "key": "from",
+                                    "value": "1",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "limits",
+                                    "value": "2",
+                                    "disabled": true
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Password",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"newPassword\":\"newpassword123\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/user/updatePassword/1234567890"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\":\"new name\",\r\n    \"surname\":\"new surname\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/user/updateUser/1234567890"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Courses",
+            "item": [
+                {
+                    "name": "Find Course by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://127.0.0.1:3001/eduApi/v1/course/findCourse/0987654321"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Course",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "http://127.0.0.1:3001/eduApi/v1/course/deleteCourse/0987654321"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "List Courses",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "http://127.0.0.1:3001/eduApi/v1/course/"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add Course",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\":\"Math 101\",\r\n    \"description\":\"Basic Math Course\",\r\n    \"duration\":10,\r\n    \"instructor\":\"John Doe\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/course/addCourse"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Appointments",
+            "item": [
+                {
+                    "name": "Add Appointment",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"date\": \"2023-10-15T10:00:00Z\",\r\n  \"course\": \"0987654321\",\r\n  \"user\": \"1234567890\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "http://127.0.0.1:3001/eduApi/v1/appointment/createAppointment"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}
