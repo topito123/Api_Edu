@@ -4,37 +4,37 @@ Esta API está diseñada para gestionar información relacionada con un sistema 
 
 ## Variables de Entorno
 
+Instala las dependencias:
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/edu-api
+JWT_SECRET=your_jwt_secret
+
 Cree un archivo `.env` en el directorio raíz y agregue las siguientes variables:
 
 ```
-MONGO_URI=<tu_cadena_de_conexión_mongodb>
-PORT=<tu_puerto_del_servidor>
-JWT_SECRET=<tu_secreto_jwt>
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/edu-api
+JWT_SECRET=your_jwt_secret
 ```
+
+## Instalación
+
+1. Clona el repositorio:
+   ```sh
+   git clone https://github.com/tu-usuario/edu-api.git
+   cd edu-api
+ 2. instalar dependendencias:
+    npm install
+3. inicia el server
+npm run dev
 
 ## Endpoints de la API
 
 ### Autenticación
 
-- **Registrar Usuario**
-    - **URL:** `/eduSystem/v1/auth/register`
-    - **Método:** `POST`
-    - **Cuerpo:**
-        ```json
-        {
-            "name": "string",
-            "surname": "string",
-            "username": "string",
-            "email": "string",
-            "phone": "string",
-            "password": "string",
-            "role": "string",
-            "profilePicture": "file"
-        }
-        ```
-
-- **Iniciar Sesión**
-    - **URL:** `/eduSystem/v1/auth/login`
+    - **Iniciar Sesión**
+    - **URL:** `/api/auth/login`
+    - **URL:** `
     - **Método:** `POST`
     - **Cuerpo:**
         ```json
@@ -42,120 +42,155 @@ JWT_SECRET=<tu_secreto_jwt>
             "email": "string",
             "password": "string"
         }
-        ```
-
-### Usuarios
-
-- **Obtener Usuario por ID**
-    - **URL:** `/eduSystem/v1/user/findUser/:uid`
-    - **Método:** `GET`
-
-- **Eliminar Usuario**
-    - **URL:** `/eduSystem/v1/user/deleteUser/:uid`
-    - **Método:** `DELETE`
-
-- **Listar Usuarios**
-    - **URL:** `/eduSystem/v1/user/`
-    - **Método:** `GET`
-
-- **Actualizar Contraseña del Usuario**
-    - **URL:** `/eduSystem/v1/user/updatePassword/:uid`
-    - **Método:** `PATCH`
-    - **Cuerpo:**
-        ```json
-        {
-            "newPassword": "string"
-        }
-        ```
-
-- **Actualizar Información del Usuario**
-    - **URL:** `/eduSystem/v1/user/updateUser/:uid`
-    - **Método:** `PUT`
-    - **Cuerpo:**
-        ```json
-        {
-            "name": "string",
-            "surname": "string"
-        }
-        ```
+        
 
 ### Estudiantes
 
 - **Registrar Estudiante**
-    - **URL:** `/eduSystem/v1/student/addStudent`
+    - **URL:** `/api/students/register`
     - **Método:** `POST`
     - **Cuerpo:**
         ```json
         {
             "name": "string",
-            "surname": "string",
-            "age": "number",
-            "email": "string"
+            "email": "string",
+            "password": "your_password"
+        }
+        ```
+        **Inscribirse en un Curso**
+
+**URL:** /api/students/enroll
+**Método:** POST
+**Encabezados:**
+Authorization: Bearer <tu_token_jwt> <vscode_annotation details='%5B%7B%22title%22%3A%22hardcoded-credentials%22%2C%22description%22%3A%22Embedding%20credentials%20in%20source%20code%20risks%20unauthorized%20access%22%7D%5D'> </vscode_annotation> 
+**Cuerpo**
+        ```json
+
+{
+  "studentId": "studentId",
+  "courseId": "courseId"
+}
+        ```
+
+## Visualizar Cursos Asignados
+
+URL: /api/students/:studentId/courses
+Método: GET
+Encabezados:
+Authorization: Bearer <tu_token_jwt>
+
+## Editar Perfil de Estudiante
+
+URL: /api/students/:studentId
+Método: PUT
+Encabezados:
+Authorization: Bearer <tu_token_jwt>
+
+**cuerpo**
+{
+  "name": "Nuevo Nombre",
+  "email": "nuevo.email@example.com"
+}
+
+**Eliminar Perfil de Estudiante**
+
+URL: /api/students/:studentId
+Método: DELETE
+Encabezados:
+Authorization: Bearer <tu_token_jwt>
+
+
+### Maestros
+
+- **Registrar Maestro**
+ **URL:** /api/teachers/register
+**Método:** POST
+**Cuerpo:**
+        ```json
+        {
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "password": "password123"
         }
         ```
 
-- **Obtener Estudiante por ID**
-    - **URL:** `/eduSystem/v1/student/findStudent/:sid`
-    - **Método:** `GET`
 
-- **Eliminar Estudiante**
-    - **URL:** `/eduSystem/v1/student/deleteStudent/:sid`
-    - **Método:** `DELETE`
-
-- **Listar Estudiantes**
-    - **URL:** `/eduSystem/v1/student/`
-    - **Método:** `GET`
 
 ### Cursos
 
-- **Registrar Curso**
-    - **URL:** `/eduSystem/v1/course/addCourse`
+- **Crear Curso**
+    - **URL:** `/api/courses`
     - **Método:** `POST`
+    **Encabezado:** `Authorization: Bearer <tu_token_jwt>`
     - **Cuerpo:**
         ```json
         {
             "name": "string",
             "description": "string",
-            "duration": "number"
+            "teacherId": "teacherId"
         }
         ```
 
-- **Obtener Curso por ID**
-    - **URL:** `/eduSystem/v1/course/findCourse/:cid`
-    - **Método:** `GET`
+- **Editar curso**
+    - **URL:** `/api/courses/:id`
+    - **Método:** `PUT`
+    **Encabezado:**
+    `Authorization: Bearer <tu_token_jwt>`
+    **Cuerpo:**
+    {
+  "name": "Nuevo Nombre del Curso",
+  "description": "Nueva Descripción del Curso"
+}
 
-- **Eliminar Curso**
-    - **URL:** `/eduSystem/v1/course/deleteCourse/:cid`
-    - **Método:** `DELETE`
+## Eliminar Curso
 
-- **Listar Cursos**
-    - **URL:** `/eduSystem/v1/course/`
-    - **Método:** `GET`
+URL: /api/courses/:id
+Método: DELETE
+Encabezados:
+Authorization: Bearer <tu_token_jwt>
+Visualizar Todos los Cursos
 
-### Profesores
+URL: /api/courses
+Método: GET
 
-- **Registrar Profesor**
-    - **URL:** `/eduSystem/v1/teacher/addTeacher`
-    - **Método:** `POST`
-    - **Cuerpo:**
-        ```json
-        {
-            "name": "string",
-            "surname": "string",
-            "email": "string",
-            "subject": "string"
-        }
-        ```
+## Asignar Estudiante a Curso
 
-- **Obtener Profesor por ID**
-    - **URL:** `/eduSystem/v1/teacher/findTeacher/:tid`
-    - **Método:** `GET`
+URL: /api/courses/:courseId/students/:studentId
+Método: POST
+Encabezados:
+Authorization: Bearer <tu_token_jwt>
 
-- **Eliminar Profesor**
-    - **URL:** `/eduSystem/v1/teacher/deleteTeacher/:tid`
-    - **Método:** `DELETE`
+## Middleware
 
-- **Listar Profesores**
-    - **URL:** `/eduSystem/v1/teacher/`
-    - **Método:** `GET`
+## Autenticación
+authenticateUser Verifica el token JWT y establece req.user.
 
+## Roles
+
+isTeacher Verifica que el usuario tenga el rol TEACHER_ROLE.
+
+isStudent Verifica que el usuario tenga el rol STUDENT_ROLE.
+
+
+## Modelos
+
+## Estudiante
+Campos:
+name: String, requerido
+email: String, requerido, único
+password: String, requerido
+courses: Array de ObjectId, referencia a Course
+
+## Maestro
+Campos:
+name: String, requerido
+email: String, requerido, único
+password: String, requerido
+courses: Array de ObjectId, referencia a Course
+
+## Curso
+Campos:
+name: String, requerido, único
+description: String, requerido
+teacher: ObjectId, referencia a Teacher, requerido
+students: Array de ObjectId, referencia a Student
